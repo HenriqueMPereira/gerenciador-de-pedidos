@@ -31,7 +31,8 @@ public class Produto {
         this.preco = preco;
     }
 
-    /** Getters e Setters
+    /**
+     * Getters e Setters
      */
     public String getNome() {
         return nome;
