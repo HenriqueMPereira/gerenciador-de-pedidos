@@ -1,9 +1,6 @@
 package io.github.henriquempereira.gerenciador_pedidos.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 /**
  * Representa a entidade Categoria do sistema de gerenciamento de pedido
@@ -16,6 +13,7 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String nome;
 
     // Construtor padrão exigido pelo JPA
