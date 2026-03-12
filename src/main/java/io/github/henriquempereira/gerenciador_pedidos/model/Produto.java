@@ -17,6 +17,9 @@ public class Produto {
     private String nome;
     @Column(name = "valor")
     private Double preco;
+    @JoinColumn(name = "categoria_id", nullable = false)
+    @ManyToOne
+    private Categoria categoria;
 
     // Construtor padrão exigido pelo JPA
     protected Produto() {}
@@ -49,4 +52,13 @@ public class Produto {
     public void setPreco(Double preco) {
         this.preco = preco;
     }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
 }
