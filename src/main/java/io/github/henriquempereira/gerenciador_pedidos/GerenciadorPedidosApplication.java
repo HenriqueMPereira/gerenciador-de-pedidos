@@ -31,13 +31,21 @@ public class GerenciadorPedidosApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		System.out.println("Hello World!");
 
-		Produto produto1 = new Produto("Cheese Burger", 28.90);
-		produtoRepository.save(produto1);
-
 		Categoria categoria1 = new Categoria("Lanches");
-		categoriaRepository.save(categoria1);
+		Categoria categoria2 = new Categoria("Bebidas");
 
-		LocalDate localDate = LocalDate.of(2026, 03, 11);
+		Produto produto1 = new Produto("Cheese Burger", 27.0);
+		Produto produto2 = new Produto("Cheese Salada", 30.0);
+		Produto produto3 = new Produto("Coca Cola", 8.0);
+
+		categoria1.adicionarProduto(produto1);
+		categoria1.adicionarProduto(produto2);
+		categoria2.adicionarProduto(produto3);
+
+		categoriaRepository.save(categoria1);
+		categoriaRepository.save(categoria2);
+
+		LocalDate localDate = LocalDate.of(2026, 3, 11);
 		Pedido pedido1 = new Pedido(localDate);
 		pedidoRepository.save(pedido1);
 
