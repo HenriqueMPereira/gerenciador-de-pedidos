@@ -2,6 +2,9 @@ package io.github.henriquempereira.gerenciador_pedidos.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Representa a entidade Produto do sistema de gerenciamento de pedidos.
  * Centraliza as informações básicas de precificação e identificação dos itens vendidos.
@@ -18,8 +21,12 @@ public class Produto {
     @Column(name = "valor")
     private Double preco;
     @JoinColumn(name = "categoria_id", nullable = false)
+
     @ManyToOne
     private Categoria categoria;
+
+    @ManyToMany(mappedBy = "listaDeProdutos")
+    private List<Pedido> listaDePedidos = new ArrayList<>();
 
     // Construtor padrão exigido pelo JPA
     protected Produto() {}
@@ -61,4 +68,7 @@ public class Produto {
         this.categoria = categoria;
     }
 
+    public List<Pedido> getListaDePedidos() {
+        return listaDePedidos;
+    }
 }
