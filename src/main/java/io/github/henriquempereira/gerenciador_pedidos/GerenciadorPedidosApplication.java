@@ -47,6 +47,8 @@ public class GerenciadorPedidosApplication implements CommandLineRunner {
 
 		LocalDate localDate = LocalDate.of(2026, 3, 11);
 		Pedido pedido1 = new Pedido(localDate);
+		pedido1.adicionaProdutoNoPedido(produto1);
+		pedido1.adicionaProdutoNoPedido(produto2);
 		pedidoRepository.save(pedido1);
 
 	}

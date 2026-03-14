@@ -3,6 +3,8 @@ package io.github.henriquempereira.gerenciador_pedidos.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Representa a entidade Pedido do sistema de gerenciamento de pedido
@@ -17,6 +19,12 @@ public class Pedido {
 
     @Column(nullable = false)
     private LocalDate data;
+
+    @ManyToMany
+    @JoinTable(name = "pedido_produto",
+            joinColumns = @JoinColumn(name = "pedido_id"),
+            inverseJoinColumns = @JoinColumn(name = "produto_id"))
+    private List<Produto> listaDeProdutos = new ArrayList<>();
 
     protected Pedido() {}
 
@@ -37,5 +45,19 @@ public class Pedido {
 
     public void setData(LocalDate data) {
         this.data = data;
+    }
+
+    /**
+     * Helpers
+     */
+
+    public void adicionaProdutoNoPedido(Produto produto) {
+        this.listaDeProdutos.add(produto);
+        produto.getListaDePedidos().add(this);
+    }
+
+    public void removeProdutoNoPedido(Produto produto) {
+        this.listaDeProdutos.remove(produto);
+        produto.getListaDePedidos().remove(this);
     }
 }
