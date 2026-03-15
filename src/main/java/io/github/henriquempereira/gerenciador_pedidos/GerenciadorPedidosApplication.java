@@ -1,9 +1,11 @@
 package io.github.henriquempereira.gerenciador_pedidos;
 
 import io.github.henriquempereira.gerenciador_pedidos.model.Categoria;
+import io.github.henriquempereira.gerenciador_pedidos.model.Fornecedor;
 import io.github.henriquempereira.gerenciador_pedidos.model.Pedido;
 import io.github.henriquempereira.gerenciador_pedidos.model.Produto;
 import io.github.henriquempereira.gerenciador_pedidos.repository.CategoriaRepository;
+import io.github.henriquempereira.gerenciador_pedidos.repository.FornecedorRepository;
 import io.github.henriquempereira.gerenciador_pedidos.repository.PedidoRepository;
 import io.github.henriquempereira.gerenciador_pedidos.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,8 @@ public class GerenciadorPedidosApplication implements CommandLineRunner {
 	CategoriaRepository categoriaRepository;
 	@Autowired
 	PedidoRepository pedidoRepository;
+	@Autowired
+	FornecedorRepository fornecedorRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -34,9 +38,14 @@ public class GerenciadorPedidosApplication implements CommandLineRunner {
 		Categoria categoria1 = new Categoria("Lanches");
 		Categoria categoria2 = new Categoria("Bebidas");
 
+		Fornecedor fornecedorBebidas = new Fornecedor("Distribuidora Ambev");
+		fornecedorRepository.save(fornecedorBebidas);
+		
 		Produto produto1 = new Produto("Cheese Burger", 27.0);
 		Produto produto2 = new Produto("Cheese Salada", 30.0);
 		Produto produto3 = new Produto("Coca Cola", 8.0);
+
+		produto3.setFornecedor(fornecedorBebidas);
 
 		categoria1.adicionarProduto(produto1);
 		categoria1.adicionarProduto(produto2);

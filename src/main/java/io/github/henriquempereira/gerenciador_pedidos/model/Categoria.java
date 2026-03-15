@@ -32,9 +32,8 @@ public class Categoria {
         this.nome = nome;
     }
 
-    /**
-     * Getters e Setters
-     */
+    // Getters e Setters
+
     public String getNome() {
         return nome;
     }
@@ -44,14 +43,18 @@ public class Categoria {
     }
 
     /**
-     * Helpers
-     * @param produto Produto a ser inserido ou removido
+     * Adiciona um produto à categoria, garantindo a sincronização bidirecional.
+     * @param produto Produto a ser inserido.
      */
     public void adicionarProduto(Produto produto) {
         listaDeProdutos.add(produto);      // O pai reconhece o filho
         produto.setCategoria(this); // O filho reconhece o pai
     }
 
+    /**
+     * Remove um produto da categoria e desfaz o vínculo bidirecional.
+     * @param produto Produto a ser removido.
+     */
     public void removerProduto(Produto produto) {
         listaDeProdutos.remove(produto);
         produto.setCategoria(null);

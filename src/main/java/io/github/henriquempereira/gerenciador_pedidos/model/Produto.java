@@ -20,15 +20,19 @@ public class Produto {
     private String nome;
     @Column(name = "valor")
     private Double preco;
-    @JoinColumn(name = "categoria_id", nullable = false)
 
+    @JoinColumn(name = "categoria_id", nullable = false)
     @ManyToOne
     private Categoria categoria;
 
     @ManyToMany(mappedBy = "listaDeProdutos")
     private List<Pedido> listaDePedidos = new ArrayList<>();
 
-    // Construtor padrão exigido pelo JPA
+    @ManyToOne
+    @JoinColumn(name = "fornecedor_id")
+    private Fornecedor fornecedor;
+
+    // Construtor padrão exigido pelo JPA.
     protected Produto() {}
 
     /**
@@ -41,9 +45,7 @@ public class Produto {
         this.preco = preco;
     }
 
-    /**
-     * Getters e Setters
-     */
+     // Getters e Setters
     public String getNome() {
         return nome;
     }
@@ -70,5 +72,13 @@ public class Produto {
 
     public List<Pedido> getListaDePedidos() {
         return listaDePedidos;
+    }
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
     }
 }
