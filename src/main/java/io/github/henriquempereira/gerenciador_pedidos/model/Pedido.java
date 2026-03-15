@@ -26,6 +26,7 @@ public class Pedido {
             inverseJoinColumns = @JoinColumn(name = "produto_id"))
     private List<Produto> listaDeProdutos = new ArrayList<>();
 
+    // Construtor padrão pedido pelo Hibernate/JPA
     protected Pedido() {}
 
     /**
@@ -36,9 +37,8 @@ public class Pedido {
         this.data = data;
     }
 
-    /**
-     * Getter e Setters
-     */
+    //Getter e Setters
+
     public LocalDate getData() {
         return data;
     }
@@ -47,15 +47,23 @@ public class Pedido {
         this.data = data;
     }
 
-    /**
-     * Helpers
-     */
+    public List<Produto> getListaDeProdutos() {
+        return listaDeProdutos;
+    }
 
+    /**
+     * Adiciona um produto ao pedido, garantindo a sincronização bidirecional.
+     * @param produto Produto a ser inserido.
+     */
     public void adicionaProdutoNoPedido(Produto produto) {
         this.listaDeProdutos.add(produto);
         produto.getListaDePedidos().add(this);
     }
 
+    /**
+     * Remove um produto do pedido e desfaz o vínculo bidirecional.
+     * @param produto Produto a ser removido.
+     */
     public void removeProdutoNoPedido(Produto produto) {
         this.listaDeProdutos.remove(produto);
         produto.getListaDePedidos().remove(this);
